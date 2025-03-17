@@ -1,18 +1,22 @@
-# Getting Started with Create React App
+# CommunionHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Connecting People Across Faiths & Interests
 
-## Available Scripts
+CommunionHub is a community-driven platform designed to bring people together through meaningful events, shared interests, and faith-based connections. Whether you're looking to attend religious gatherings, social meetups, or charity drives, CommunionHub provides a space to discover, connect, and contribute to your community.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+Event Discovery: Browse a wide range of events, from religious gatherings to social meetups and charity drives.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Community Building: Connect with like-minded individuals and build meaningful relationships.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Testimonials: Hear from community members about their experiences and the impact of CommunionHub.
+
+How It Works: Simple steps to create your profile, discover events, and join or contribute to the community.
+
+Stats Dashboard: Track the impact of the platform with real-time statistics on community members, events, and lives impacted.
+
+
 
 ### `npm test`
 
