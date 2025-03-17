@@ -382,7 +382,9 @@
 }
 
 .feature-button:hover {
-  background-color: #1a1a1a;
+  background-color: white;
+  color: black;
+  border: 1px solid #d1d5db;
 }
 
 .feature-button-outline {
@@ -393,6 +395,7 @@
 
 .feature-button-outline:hover {
   background-color: #f3f4f6;
+  color: black;
 }
 
 /* CTA Section */
