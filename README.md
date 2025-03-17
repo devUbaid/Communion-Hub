@@ -4,6 +4,9 @@
 
 CommunionHub is a community-driven platform designed to bring people together through meaningful events, shared interests, and faith-based connections. Whether you're looking to attend religious gatherings, social meetups, or charity drives, CommunionHub provides a space to discover, connect, and contribute to your community.
 
+
+## Please Watch here: [![Watch the video](https://cdn.loom.com/sessions/thumbnails/f85d990754cc45a886170dda1d173f6a.jpg)](https://www.loom.com/share/f85d990754cc45a886170dda1d173f6a)
+
 ## Features
 
 * Event Discovery: Browse a wide range of events, from religious gatherings to social meetups and charity drives.
@@ -34,7 +37,6 @@ CommunionHub is more than just a platform—it's a movement to foster inclusivit
 
 
 
-
 ## Get Started
 
 * Clone the repository: git clone https://github.com/devUbaid/Communion-Hub.git
@@ -44,3 +46,5 @@ CommunionHub is more than just a platform—it's a movement to foster inclusivit
 * Start the development server: npm start
 
 * Build for production: npm run build
+
+
