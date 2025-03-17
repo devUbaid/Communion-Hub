@@ -6,69 +6,41 @@ CommunionHub is a community-driven platform designed to bring people together th
 
 ## Features
 
-Event Discovery: Browse a wide range of events, from religious gatherings to social meetups and charity drives.
+* Event Discovery: Browse a wide range of events, from religious gatherings to social meetups and charity drives.
 
-Community Building: Connect with like-minded individuals and build meaningful relationships.
+* Community Building: Connect with like-minded individuals and build meaningful relationships.
 
-Testimonials: Hear from community members about their experiences and the impact of CommunionHub.
+* Testimonials: Hear from community members about their experiences and the impact of CommunionHub.
 
-How It Works: Simple steps to create your profile, discover events, and join or contribute to the community.
+* How It Works: Simple steps to create your profile, discover events, and join or contribute to the community.
 
-Stats Dashboard: Track the impact of the platform with real-time statistics on community members, events, and lives impacted.
+* Stats Dashboard: Track the impact of the platform with real-time statistics on community members, events, and lives impacted.
 
 
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Frontend: React, React Router, Framer Motion (for animations), GSAP (for advanced animations), Lucide React (for icons).
 
-### `npm run build`
+* Styling: CSS modules for component-specific styles.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Build Tool: Create React App (CRA) with React Scripts.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Deployment: Vercel for seamless deployment and hosting.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Why CommunionHub?
 
-### `npm run eject`
+CommunionHub is more than just a platform—it's a movement to foster inclusivity, diversity, and community engagement. By connecting people of all faiths and backgrounds, we aim to create a world where everyone feels welcome and valued.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Get Started
 
-## Learn More
+* Clone the repository: git clone https://github.com/devUbaid/Communion-Hub.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Install dependencies: npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Start the development server: npm start
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Build for production: npm run build
