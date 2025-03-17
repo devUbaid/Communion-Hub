@@ -1,20 +1,23 @@
-import React from "react"
+import React from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import "../styles/Events.css";
 
-import { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import "../styles/Events.css"
-// import Eid from "../assets/images/Eid-ul-fitr.webp";
+// Import images
+import HoliImage from "../assets/images/Holi.jpg";
+import ChristmasImage from "../assets/images/Christmas-Festival.webp";
+import EidImage from "../assets/images/Eid-ul-fitr.webp";
+import PicnicImage from "../assets/images/Picnic.jpg";
+import MeditationImage from "../assets/images/mediation.jpg";
+import WinterFestivalImage from "../assets/images/winter-carnival.jpg";
 
 function Events() {
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  const filter = searchParams.get("filter")
-  const action = searchParams.get("action")
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const filter = searchParams.get("filter");
+  const action = searchParams.get("action");
 
-
-
-
-  // Sample initial events
+  // Sample initial events with images
   const initialEvents = [
     {
       id: 1,
@@ -23,7 +26,7 @@ function Events() {
       location: "Community Park, 123 Main St",
       description: "Join us for a colorful celebration of the Holi festival with music, dance, and traditional colors.",
       category: "Social",
-      image: require("../assets/images/Eid-ul-fitr.webp")
+      image: HoliImage,
     },
     {
       id: 2,
@@ -32,8 +35,8 @@ function Events() {
       location: "Downtown Community Center",
       description: "Help collect gifts and essentials for underprivileged children this holiday season.",
       category: "Charity",
+      image: ChristmasImage,
     },
-    
     {
       id: 3,
       title: "Eid-ul-Fitr",
@@ -41,9 +44,8 @@ function Events() {
       location: "Islamic Center, 789 Elm St",
       description: "Join the community in celebrating Eid with prayers and festive meals.",
       category: "Religious",
-  
+      image: EidImage,
     },
-    
     {
       id: 4,
       title: "Community Picnic",
@@ -51,8 +53,8 @@ function Events() {
       location: "Central Park",
       description: "Bring your family for a day of fun, food, and fellowship with community members.",
       category: "Social",
+      image: PicnicImage,
     },
-   
     {
       id: 5,
       title: "Meditation Workshop",
@@ -60,8 +62,8 @@ function Events() {
       location: "Wellness Center, 456 Oak Ave",
       description: "Learn meditation techniques from different spiritual traditions.",
       category: "Religious",
+      image: MeditationImage,
     },
-    // Past events
     {
       id: 6,
       title: "Winter Festival",
@@ -69,14 +71,15 @@ function Events() {
       location: "City Square",
       description: "A celebration of winter traditions from around the world.",
       category: "Social",
+      image: WinterFestivalImage,
     },
-  ]
+  ];
 
-  const [events, setEvents] = useState(initialEvents)
-  const [filteredEvents, setFilteredEvents] = useState(initialEvents)
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [animatedItems, setAnimatedItems] = useState([])
+  const [events, setEvents] = useState(initialEvents);
+  const [filteredEvents, setFilteredEvents] = useState(initialEvents);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [animatedItems, setAnimatedItems] = useState([]);
 
   // Form state
   const [newEvent, setNewEvent] = useState({
@@ -85,146 +88,147 @@ function Events() {
     location: "",
     description: "",
     category: "Social",
-  })
+    image: null, // Add image to the form state
+  });
 
   // Handle URL parameters
   useEffect(() => {
     if (filter === "upcoming") {
-      const today = new Date()
-      setFilteredEvents(events.filter((event) => event.date >= today))
-      setSelectedCategory("Upcoming")
+      const today = new Date();
+      setFilteredEvents(events.filter((event) => event.date >= today));
+      setSelectedCategory("Upcoming");
     } else if (filter === "past") {
-      const today = new Date()
-      setFilteredEvents(events.filter((event) => event.date < today))
-      setSelectedCategory("Past")
+      const today = new Date();
+      setFilteredEvents(events.filter((event) => event.date < today));
+      setSelectedCategory("Past");
     }
 
     if (action === "create") {
-      setIsDialogOpen(true)
+      setIsDialogOpen(true);
     }
-  }, [filter, action, events])
+  }, [filter, action, events]);
 
   // Animation on scroll
   useEffect(() => {
-    const observer = new IntersectionObserver(  
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setAnimatedItems((prev) => [...prev, entry.target.dataset.id])
+            setAnimatedItems((prev) => [...prev, entry.target.dataset.id]);
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
-    document.querySelectorAll(".event-card").forEach((el) => observer.observe(el))
+    document.querySelectorAll(".event-card").forEach((el) => observer.observe(el));
 
     return () => {
-      document.querySelectorAll(".event-card").forEach((el) => observer.unobserve(el))
-    }
-  }, [filteredEvents])
+      document.querySelectorAll(".event-card").forEach((el) => observer.unobserve(el));
+    };
+  }, [filteredEvents]);
 
   // Filter events by category
   const filterEvents = (category) => {
-    setSelectedCategory(category)
+    setSelectedCategory(category);
 
     if (category === "All") {
-      setFilteredEvents(events)
+      setFilteredEvents(events);
     } else if (category === "Today") {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const tomorrow = new Date(today)
-      tomorrow.setDate(tomorrow.getDate() + 1)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
 
       setFilteredEvents(
         events.filter((event) => {
-          const eventDate = new Date(event.date)
-          eventDate.setHours(0, 0, 0, 0)
-          return eventDate.getTime() === today.getTime()
+          const eventDate = new Date(event.date);
+          eventDate.setHours(0, 0, 0, 0);
+          return eventDate.getTime() === today.getTime();
         }),
-      )
+      );
     } else if (category === "Tomorrow") {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const tomorrow = new Date(today)
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      const dayAfterTomorrow = new Date(today)
-      dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dayAfterTomorrow = new Date(today);
+      dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
 
       setFilteredEvents(
         events.filter((event) => {
-          const eventDate = new Date(event.date)
-          eventDate.setHours(0, 0, 0, 0)
-          return eventDate.getTime() === tomorrow.getTime()
+          const eventDate = new Date(event.date);
+          eventDate.setHours(0, 0, 0, 0);
+          return eventDate.getTime() === tomorrow.getTime();
         }),
-      )
+      );
     } else if (category === "This Week") {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const endOfWeek = new Date(today)
-      const day = endOfWeek.getDay()
-      const diff = endOfWeek.getDate() - day + (day === 0 ? -6 : 7)
-      endOfWeek.setDate(diff)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const endOfWeek = new Date(today);
+      const day = endOfWeek.getDay();
+      const diff = endOfWeek.getDate() - day + (day === 0 ? -6 : 7);
+      endOfWeek.setDate(diff);
 
       setFilteredEvents(
         events.filter((event) => {
-          const eventDate = new Date(event.date)
-          return eventDate >= today && eventDate <= endOfWeek
+          const eventDate = new Date(event.date);
+          return eventDate >= today && eventDate <= endOfWeek;
         }),
-      )
+      );
     } else if (category === "Next Week") {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const startOfNextWeek = new Date(today)
-      const day = startOfNextWeek.getDay()
-      const diff = startOfNextWeek.getDate() - day + (day === 0 ? -6 : 7) + 1
-      startOfNextWeek.setDate(diff)
-      const endOfNextWeek = new Date(startOfNextWeek)
-      endOfNextWeek.setDate(endOfNextWeek.getDate() + 6)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const startOfNextWeek = new Date(today);
+      const day = startOfNextWeek.getDay();
+      const diff = startOfNextWeek.getDate() - day + (day === 0 ? -6 : 7) + 1;
+      startOfNextWeek.setDate(diff);
+      const endOfNextWeek = new Date(startOfNextWeek);
+      endOfNextWeek.setDate(endOfNextWeek.getDate() + 6);
 
       setFilteredEvents(
         events.filter((event) => {
-          const eventDate = new Date(event.date)
-          return eventDate >= startOfNextWeek && eventDate <= endOfNextWeek
+          const eventDate = new Date(event.date);
+          return eventDate >= startOfNextWeek && eventDate <= endOfNextWeek;
         }),
-      )
+      );
     } else if (category === "This Month") {
-      const today = new Date()
-      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
-      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+      const today = new Date();
+      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
       setFilteredEvents(
         events.filter((event) => {
-          const eventDate = new Date(event.date)
-          return eventDate >= startOfMonth && eventDate <= endOfMonth
+          const eventDate = new Date(event.date);
+          return eventDate >= startOfMonth && eventDate <= endOfMonth;
         }),
-      )
+      );
     } else if (category === "Upcoming") {
-      const today = new Date()
-      setFilteredEvents(events.filter((event) => event.date >= today))
+      const today = new Date();
+      setFilteredEvents(events.filter((event) => event.date >= today));
     } else if (category === "Past") {
-      const today = new Date()
-      setFilteredEvents(events.filter((event) => event.date < today))
+      const today = new Date();
+      setFilteredEvents(events.filter((event) => event.date < today));
     } else {
-      setFilteredEvents(events.filter((event) => event.category === category))
+      setFilteredEvents(events.filter((event) => event.category === category));
     }
-  }
+  };
 
   // Handle form input changes
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setNewEvent((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setNewEvent((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Handle category selection
   const handleCategoryChange = (e) => {
-    setNewEvent((prev) => ({ ...prev, category: e.target.value }))
-  }
+    setNewEvent((prev) => ({ ...prev, category: e.target.value }));
+  };
 
   // Add new event
   const handleAddEvent = () => {
     if (!newEvent.title || !newEvent.date || !newEvent.location) {
-      return
+      return;
     }
 
     const newEventObj = {
@@ -234,16 +238,17 @@ function Events() {
       location: newEvent.location,
       description: newEvent.description,
       category: newEvent.category,
-    }
+      image: newEvent.image, // Include the image in the new event
+    };
 
-    const updatedEvents = [...events, newEventObj]
-    setEvents(updatedEvents)
+    const updatedEvents = [...events, newEventObj];
+    setEvents(updatedEvents);
 
     // Apply current filter to updated events
     if (selectedCategory === "All") {
-      setFilteredEvents(updatedEvents)
+      setFilteredEvents(updatedEvents);
     } else {
-      setFilteredEvents(updatedEvents.filter((event) => event.category === selectedCategory))
+      setFilteredEvents(updatedEvents.filter((event) => event.category === selectedCategory));
     }
 
     // Reset form and close dialog
@@ -253,9 +258,10 @@ function Events() {
       location: "",
       description: "",
       category: "Social",
-    })
-    setIsDialogOpen(false)
-  }
+      image: null, // Reset image
+    });
+    setIsDialogOpen(false);
+  };
 
   // Format date
   const formatDate = (date) => {
@@ -264,8 +270,8 @@ function Events() {
       year: "numeric",
       month: "long",
       day: "numeric",
-    }).format(date)
-  }
+    }).format(date);
+  };
 
   // Format time
   const formatTime = (date) => {
@@ -273,8 +279,8 @@ function Events() {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
-    }).format(date)
-  }
+    }).format(date);
+  };
 
   // Format month
   const formatMonth = (date) => {
@@ -282,15 +288,15 @@ function Events() {
       month: "short",
     })
       .format(date)
-      .toUpperCase()
-  }
+      .toUpperCase();
+  };
 
   // Format day
   const formatDay = (date) => {
     return new Intl.DateTimeFormat("en-US", {
       day: "numeric",
-    }).format(date)
-  }
+    }).format(date);
+  };
 
   return (
     <div className="events-page">
@@ -402,7 +408,7 @@ function Events() {
                 >
                   <div className="event-image-container">
                     <img
-                      src={`/placeholder.svg?height=200&width=400&text=${event.title}`}
+                      src={event.image} // Use the event's image
                       alt={event.title}
                       className="event-image"
                     />
@@ -595,6 +601,27 @@ function Events() {
                   className="form-input"
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="image" className="form-label">
+                  Image
+                </label>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setNewEvent((prev) => ({ ...prev, image: reader.result }));
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className="form-input"
+                />
+              </div>
             </div>
             <div className="dialog-footer">
               <button className="dialog-button cancel" onClick={() => setIsDialogOpen(false)}>
@@ -608,8 +635,7 @@ function Events() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Events
-
+export default Events;

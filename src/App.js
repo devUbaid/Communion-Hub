@@ -11,7 +11,7 @@ function App() {
   // Initialize theme from localStorage or system preference
 
   return (
-    <div className={`app `}>
+    <div className= "app" >
       <Header />
       <main className="main-content">
         <Routes>
